@@ -43,14 +43,6 @@ int main(int argc, char *argv[])
         perror("socket creation failed!!");  
         exit(1);  
     }  
-
-    //Allow multiple connections 
-    if( setsockopt(HeadSock, SOL_SOCKET, SO_REUSEADDR, (char *)&connections, sizeof(connections)) < 0 )  
-    {  
-        perror("setsockopt error");  
-        exit(1);  
-    }
-
     //type of socket created 
     address.sin_family = AF_INET;  
     address.sin_addr.s_addr = INADDR_ANY;  
@@ -62,6 +54,13 @@ int main(int argc, char *argv[])
         perror("binding failed!!");  
         exit(1);  
     }  
+    //Allow multiple connections 
+    if( setsockopt(HeadSock, SOL_SOCKET, SO_REUSEADDR, (char *)&connections, sizeof(connections)) < 0 )  
+    {  
+        perror("setsockopt error");  
+        exit(1);  
+    }
+    
     printf("Listening on portnum: %d \n", PORT);  
 
     if (listen(HeadSock, 5) < 0)  
