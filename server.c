@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
         // timeout limit is set to 15sec
         request = select( sdMax + 1 , &readfd , NULL , NULL , &timeoutLimit);  
 
-        if ((request < 0) && (errno!=EINTR)) 
+        if ((request < 0)) 
         {  
             printf("Error in selection \n");  
         }  
